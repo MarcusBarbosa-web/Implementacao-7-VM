@@ -1,0 +1,156 @@
+Script started on 2026-11-19 20:41:53-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="148" LINES="35"]
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ date
+[?2004lThu Nov 19 20:42:03 -03 2026
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ wha[Koami
+[?2004lmarcus
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ pwd
+[?2004l/home/marcus/Implementação-7-VM
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[01m[Kvm.c:4:10:[m[K [01;31m[Kfatal error: [m[Kctype.ha: No such file or directory
+    4 | #include [01;31m[K<ctype.ha>[m[K
+      |          [01;31m[K^~~~~~~~~~[m[K
+compilation terminated.
+make: *** [Makefile:7: vm] Error 1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[01m[Kvm.c:[m[K In function ‘[01m[Kinit_frames[m[K’:
+[01m[Kvm.c:50:38:[m[K [01;31m[Kerror: [m[Kexpected expression before ‘[01m[K)[m[K’ token
+   50 |     for(int i = 0; i < NUM_FRAMES; i+[01;31m[K)[m[K{
+      |                                      [01;31m[K^[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Kparse_algorithm[m[K’:
+[01m[Kvm.c:63:28:[m[K [01;31m[Kerror: [m[Klvalue required as left operand of assignment
+   63 |     if(strcmp(name, "lru") [01;31m[K=[m[K 0){
+      |                            [01;31m[K^[m[K
+[01m[Kvm.c:64:13:[m[K [01;35m[Kwarning: [m[Kassignment to ‘[01m[Kint *[m[K’ from ‘[01m[Kint[m[K’ makes pointer from integer without a cast [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wint-conversion-Wint-conversion]8;;[m[K]
+   64 |         alg [01;35m[K=[m[K ALG_LRU;
+      |             [01;35m[K^[m[K
+[01m[Kvm.c:57:51:[m[K [01;35m[Kwarning: [m[Kparameter ‘[01m[Kalg[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-parameter-Wunused-but-set-parameter]8;;[m[K]
+   57 | static int parse_algorithm(const char *name, [01;35m[Kint *alg[m[K){
+      |                                              [01;35m[K~~~~~^~~[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Kchoose_frame[m[K’:
+[01m[Kvm.c:125:16:[m[K [01;35m[Kwarning: [m[Kreturning ‘[01m[Kint (*)(void)[m[K’ from a function with return type ‘[01m[Kint[m[K’ makes integer from pointer without a cast [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wint-conversion-Wint-conversion]8;;[m[K]
+  125 |         return [01;35m[Kchoose_lru_frame[m[K;
+      |                [01;35m[K^~~~~~~~~~~~~~~~[m[K
+[01m[Kvm.c:128:11:[m[K [01;35m[Kwarning: [m[Kstatement with no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  128 |     [01;35m[Kframe == fifo_next[m[K;
+      |     [01;35m[K~~~~~~^~~~~~~~~~~~[m[K
+[01m[Kvm.c:129:15:[m[K [01;35m[Kwarning: [m[Koperation on ‘[01m[Kfifo_next[m[K’ may be undefined [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsequence-point-Wsequence-point]8;;[m[K]
+  129 |     fifo_next [01;35m[K=[m[K (fifo_next += 1) % NUM_FRAMES;
+      |               [01;35m[K^[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Ktlb_insert[m[K’:
+[01m[Kvm.c:147:15:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K=[m[K’, ‘[01m[K,[m[K’, ‘[01m[K;[m[K’, ‘[01m[Kasm[m[K’ or ‘[01m[K__attribute__[m[K’ before ‘[01m[K==[m[K’ token
+  147 |     int index [01;31m[K==[m[K tlb_next;
+      |               [01;31m[K^~[m[K
+[01m[Kvm.c:147:15:[m[K [01;31m[Kerror: [m[Kexpected expression before ‘[01m[K==[m[K’ token
+[01m[Kvm.c:149:13:[m[K [01;31m[Kerror: [m[Karray subscript is not an integer
+  149 |     tlb_page[01;31m[K[[m[Kindex] = page;
+      |             [01;31m[K^[m[K
+[01m[Kvm.c:150:14:[m[K [01;31m[Kerror: [m[Karray subscript is not an integer
+  150 |     tlb_frame[01;31m[K[[m[Kindex] = frame;
+      |              [01;31m[K^[m[K
+[01m[Kvm.c:151:14:[m[K [01;35m[Kwarning: [m[Koperation on ‘[01m[Ktlb_next[m[K’ may be undefined [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsequence-point-Wsequence-point]8;;[m[K]
+  151 |     tlb_next [01;35m[K=[m[K (tlb_next += 1) % TLB_SIZE;
+      |              [01;35m[K^[m[K
+[01m[Kvm.c:153:12:[m[K [01;35m[Kwarning: [m[Kreturning ‘[01m[Kchar * (*)(const char *, int)[m[K’ from a function with return type ‘[01m[Kint[m[K’ makes integer from pointer without a cast [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wint-conversion-Wint-conversion]8;;[m[K]
+  153 |     return [01;35m[Kindex[m[K;
+      |            [01;35m[K^~~~~[m[K
+make: *** [Makefile:7: vm] Error 1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[01m[Kvm.c:[m[K In function ‘[01m[Kparse_algorithm[m[K’:
+[01m[Kvm.c:64:13:[m[K [01;35m[Kwarning: [m[Kassignment to ‘[01m[Kint *[m[K’ from ‘[01m[Kint[m[K’ makes pointer from integer without a cast [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wint-conversion-Wint-conversion]8;;[m[K]
+   64 |         alg [01;35m[K=[m[K ALG_LRU;
+      |             [01;35m[K^[m[K
+[01m[Kvm.c:57:51:[m[K [01;35m[Kwarning: [m[Kparameter ‘[01m[Kalg[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-parameter-Wunused-but-set-parameter]8;;[m[K]
+   57 | static int parse_algorithm(const char *name, [01;35m[Kint *alg[m[K){
+      |                                              [01;35m[K~~~~~^~~[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Kchoose_frame[m[K’:
+[01m[Kvm.c:125:16:[m[K [01;35m[Kwarning: [m[Kreturning ‘[01m[Kint (*)(void)[m[K’ from a function with return type ‘[01m[Kint[m[K’ makes integer from pointer without a cast [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wint-conversion-Wint-conversion]8;;[m[K]
+  125 |         return [01;35m[Kchoose_lru_frame[m[K;
+      |                [01;35m[K^~~~~~~~~~~~~~~~[m[K
+[01m[Kvm.c:128:11:[m[K [01;35m[Kwarning: [m[Kstatement with no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  128 |     [01;35m[Kframe == fifo_next[m[K;
+      |     [01;35m[K~~~~~~^~~~~~~~~~~~[m[K
+[01m[Kvm.c:129:15:[m[K [01;35m[Kwarning: [m[Koperation on ‘[01m[Kfifo_next[m[K’ may be undefined [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsequence-point-Wsequence-point]8;;[m[K]
+  129 |     fifo_next [01;35m[K=[m[K (fifo_next += 1) % NUM_FRAMES;
+      |               [01;35m[K^[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Ktlb_insert[m[K’:
+[01m[Kvm.c:151:14:[m[K [01;35m[Kwarning: [m[Koperation on ‘[01m[Ktlb_next[m[K’ may be undefined [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsequence-point-Wsequence-point]8;;[m[K]
+  151 |     tlb_next [01;35m[K=[m[K (tlb_next += 1) % TLB_SIZE;
+      |              [01;35m[K^[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Kchoose_frame[m[K’:
+[01m[Kvm.c:131:12:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe[m[K’ may be used uninitialized [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wmaybe-uninitialized-Wmaybe-uninitialized]8;;[m[K]
+  131 |     return [01;35m[Kframe[m[K;
+      |            [01;35m[K^~~~~[m[K
+[01m[Kvm.c:118:9:[m[K [01;36m[Knote: [m[K‘[01m[Kframe[m[K’ was declared here
+  118 |     int [01;36m[Kframe[m[K;
+      |         [01;36m[K^~~~~[m[K
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[01m[Kvm.c:[m[K In function ‘[01m[Kparse_algorithm[m[K’:
+[01m[Kvm.c:64:14:[m[K [01;35m[Kwarning: [m[Kstatement with no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+   64 |         *alg [01;35m[K=[m[K= ALG_LRU;
+      |              [01;35m[K^[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Kchoose_frame[m[K’:
+[01m[Kvm.c:125:16:[m[K [01;35m[Kwarning: [m[Kreturning ‘[01m[Kint (*)(void)[m[K’ from a function with return type ‘[01m[Kint[m[K’ makes integer from pointer without a cast [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wint-conversion-Wint-conversion]8;;[m[K]
+  125 |         return [01;35m[Kchoose_lru_frame[m[K;
+      |                [01;35m[K^~~~~~~~~~~~~~~~[m[K
+[01m[Kvm.c:128:11:[m[K [01;35m[Kwarning: [m[Kstatement with no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  128 |     [01;35m[Kframe == fifo_next[m[K;
+      |     [01;35m[K~~~~~~^~~~~~~~~~~~[m[K
+[01m[Kvm.c:129:15:[m[K [01;35m[Kwarning: [m[Koperation on ‘[01m[Kfifo_next[m[K’ may be undefined [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsequence-point-Wsequence-point]8;;[m[K]
+  129 |     fifo_next [01;35m[K=[m[K (fifo_next += 1) % NUM_FRAMES;
+      |               [01;35m[K^[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Ktlb_insert[m[K’:
+[01m[Kvm.c:151:14:[m[K [01;35m[Kwarning: [m[Koperation on ‘[01m[Ktlb_next[m[K’ may be undefined [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsequence-point-Wsequence-point]8;;[m[K]
+  151 |     tlb_next [01;35m[K=[m[K (tlb_next += 1) % TLB_SIZE;
+      |              [01;35m[K^[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Kchoose_frame[m[K’:
+[01m[Kvm.c:131:12:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe[m[K’ may be used uninitialized [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wmaybe-uninitialized-Wmaybe-uninitialized]8;;[m[K]
+  131 |     return [01;35m[Kframe[m[K;
+      |            [01;35m[K^~~~~[m[K
+[01m[Kvm.c:118:9:[m[K [01;36m[Knote: [m[K‘[01m[Kframe[m[K’ was declared here
+  118 |     int [01;36m[Kframe[m[K;
+      |         [01;36m[K^~~~~[m[K
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[01m[Kvm.c:[m[K In function ‘[01m[Kparse_algorithm[m[K’:
+[01m[Kvm.c:64:14:[m[K [01;35m[Kwarning: [m[Kstatement with no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+   64 |         *alg [01;35m[K=[m[K= ALG_LRU;
+      |              [01;35m[K^[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Kchoose_frame[m[K’:
+[01m[Kvm.c:125:16:[m[K [01;35m[Kwarning: [m[Kreturning ‘[01m[Kint (*)(void)[m[K’ from a function with return type ‘[01m[Kint[m[K’ makes integer from pointer without a cast [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wint-conversion-Wint-conversion]8;;[m[K]
+  125 |         return [01;35m[Kchoose_lru_frame[m[K;
+      |                [01;35m[K^~~~~~~~~~~~~~~~[m[K
+[01m[Kvm.c:128:11:[m[K [01;35m[Kwarning: [m[Kstatement with no effect [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-value-Wunused-value]8;;[m[K]
+  128 |     [01;35m[Kframe == fifo_next[m[K;
+      |     [01;35m[K~~~~~~^~~~~~~~~~~~[m[K
+[01m[Kvm.c:131:12:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe[m[K’ may be used uninitialized [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wmaybe-uninitialized-Wmaybe-uninitialized]8;;[m[K]
+  131 |     return [01;35m[Kframe[m[K;
+      |            [01;35m[K^~~~~[m[K
+[01m[Kvm.c:118:9:[m[K [01;36m[Knote: [m[K‘[01m[Kframe[m[K’ was declared here
+  118 |     int [01;36m[Kframe[m[K;
+      |         [01;36m[K^~~~~[m[K
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make[K[K[K[K[7m./vm addresses.txt lru[27m./vm addresses.txt lru
+[?2004l[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mtail -5 correct.txt[27mtail -5 correct.txt
+[?2004lNumber of Translated Addresses = 1000
+Page Faults = 539
+Page Fault Rate = 0.539
+TLB Hits = 54
+TLB Hit Rate = 0.054
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mdiff correct.txt correct_prof.txt && echo IDENTICO[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdiff correct.txt correct_prof.txt && echo IDENTICO
+[?2004lIDENTICO
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make clear
+[?2004lmake: *** No rule to make target 'clear'.  Stop.
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ exit[K[K[K[Kclear
+[?2004l[H[2J[3J[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lmake: Nothing to be done for 'all'.
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make clean
+[?2004lrm -f vm
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-19 20:49:46-03:00 [COMMAND_EXIT_CODE="0"]

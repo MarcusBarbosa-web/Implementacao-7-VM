@@ -10,6 +10,9 @@
 #define LINE_SIZE 64
 #define BACKING_FILE "BACKING_STORE.bin"
 #define OUTPUT_FILE "correct.txt"
+#define ALG_FIFO 0
+#define ALG_LRU 1
+#define TLB_SIZE 16
 
 static int page_table[NUM_PAGES];
 static signed char physical_memory[NUM_FRAMES][PAGE_SIZE];
@@ -18,6 +21,13 @@ static int page_faults = 0;
 static int translated = 0;
 static int frame_page[NUM_FRAMES];
 static int fifo_next = 0;
+static int replace_alg = ALG_FIFO;
+static unsigned long frame_last_use[NUM_FRAMES];
+static unsigned long clock_counter = 0;
+static int tlb_page[TLB_SIZE];
+static int tlb_frame[TLB_SIZE];
+static int tlb_next = 0;
+static int tlb_hits = 0;
 
 
 
@@ -28,10 +38,34 @@ static void init_page_table(void){
 }
 
 
+static void init_tlb(void){
+    for(int i = 0; i < TLB_SIZE; i++){
+        tlb_page[i] = -1;
+        tlb_frame[i] = -1;
+    }
+}
+
+
 static void init_frames(void){
     for(int i = 0; i < NUM_FRAMES; i++){
         frame_page[i] = -1;
+        frame_last_use[i] = 0;
     }
+}
+
+
+static int parse_algorithm(const char *name, int *alg){
+    if(strcmp(name, "fifo") == 0){
+        *alg = ALG_FIFO;
+        return 1;
+    }
+
+    if(strcmp(name, "lru") == 0){
+        *alg = ALG_LRU;
+        return 1;
+    }
+
+    return 0;
 }
 
 
@@ -67,6 +101,19 @@ static int parse_address(const char *line, int *address){
 }
 
 
+static int choose_lru_frame(void){
+    int victim = 0;
+
+    for(int i = 1; i < NUM_FRAMES; i++){
+        if(frame_last_use[i] < frame_last_use[victim]){
+            victim = i;
+        }
+    }
+
+    return victim;
+}
+
+
 static int choose_frame(void){
     int frame;
 
@@ -74,10 +121,46 @@ static int choose_frame(void){
         return next_frame++;
     }
 
+    if(replace_alg == ALG_LRU){
+        return choose_lru_frame();
+    }
+
     frame = fifo_next;
     fifo_next = (fifo_next + 1) % NUM_FRAMES;
 
     return frame;
+}
+
+
+static int tlb_lookup(int page){
+    for(int i = 0; i < TLB_SIZE; i++){
+        if(tlb_page[i] == page){
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
+static int tlb_insert(int page, int frame){
+    int index = tlb_next;
+
+    tlb_page[index] = page;
+    tlb_frame[index] = frame;
+    tlb_next = (tlb_next + 1) % TLB_SIZE;
+
+    return index;
+}
+
+
+static void tlb_invalidate(int page){
+    for(int i = 0; i < TLB_SIZE; i++){
+        if(tlb_page[i] == page){
+            tlb_page[i] = -1;
+            tlb_frame[i] = -1;
+        }
+    }
 }
 
 
@@ -93,6 +176,7 @@ static int load_page(FILE *backing, int page){
     }
 
     if(frame_page[frame] != -1){
+        tlb_invalidate(frame_page[frame]);
         page_table[frame_page[frame]] = -1;
     }
 
@@ -104,19 +188,32 @@ static int load_page(FILE *backing, int page){
 }
 
 
-static int translate(FILE *backing, int address, int *physical, int *value){
+static int translate(FILE *backing, int address, int *tlb_index, int *physical, int *value){
     int page = address >> 8;
     int offset = address & 0xFF;
-    int frame = page_table[page];
+    int index = tlb_lookup(page);
+    int frame;
 
-    if(frame == -1){
-        frame = load_page(backing, page);
+    if(index != -1){
+        tlb_hits++;
+        frame = tlb_frame[index];
+    }else{
+        frame = page_table[page];
 
         if(frame == -1){
-            return -1;
+            frame = load_page(backing, page);
+
+            if(frame == -1){
+                return -1;
+            }
         }
+
+        index = tlb_insert(page, frame);
     }
 
+    frame_last_use[frame] = ++clock_counter;
+
+    *tlb_index = index;
     *physical = frame * PAGE_SIZE + offset;
     *value = physical_memory[frame][offset];
 
@@ -131,11 +228,16 @@ int main(int argc, char *argv[]){
     FILE *input, *backing, *output;
 
     char line[LINE_SIZE];
-    int address, physical, value;
+    int address, tlb_index, physical, value;
     int line_number = 0;
 
-    if(argc != 2){
-        fprintf(stderr, "Uso: %s <arquivo_de_enderecos>\n", argv[0]);
+    if(argc != 3){
+        fprintf(stderr, "Uso: %s <arquivo_de_enderecos> <fifo|lru>\n", argv[0]);
+        return 1;
+    }
+
+    if(!parse_algorithm(argv[2], &replace_alg)){
+        fprintf(stderr, "Erro: algoritmo '%s' invalido (use fifo ou lru)\n", argv[2]);
         return 1;
     }
 
@@ -167,6 +269,7 @@ int main(int argc, char *argv[]){
 
     init_page_table();
     init_frames();
+    init_tlb();
 
     while(fgets(line, sizeof(line), input) != NULL){
         line_number++;
@@ -191,14 +294,14 @@ int main(int argc, char *argv[]){
             goto fail;
         }
 
-        if(translate(backing, address, &physical, &value) != 0){
+        if(translate(backing, address, &tlb_index, &physical, &value) != 0){
             fprintf(stderr, "Erro: falha ao traduzir o endereco da linha %d\n", line_number);
             goto fail;
         }
 
         translated++;
 
-        fprintf(output, "Virtual address: %d Physical address: %d Value: %d\n", address, physical, value);
+        fprintf(output, "Virtual address: %d TLB: %d Physical address: %d Value: %d\n", address, tlb_index, physical, value);
     }
 
     if(ferror(input)){
@@ -214,6 +317,8 @@ int main(int argc, char *argv[]){
     fprintf(output, "Number of Translated Addresses = %d\n", translated);
     fprintf(output, "Page Faults = %d\n", page_faults);
     fprintf(output, "Page Fault Rate = %.3f\n", (double)page_faults / translated);
+    fprintf(output, "TLB Hits = %d\n", tlb_hits);
+    fprintf(output, "TLB Hit Rate = %.3f\n", (double)tlb_hits / translated);
 
     fclose(input);
     fclose(backing);
