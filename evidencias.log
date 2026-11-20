@@ -154,3 +154,238 @@ TLB Hit Rate = 0.054
 [?2004lexit
 
 Script done on 2026-11-19 20:49:46-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-20 16:07:30-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="148" LINES="35"]
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ date
+[?2004lFri Nov 20 16:07:32 -03 2026
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ whoami
+[?2004lmarcus
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ pwd
+[?2004l/home/marcus/Implementação-7-VM
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[01m[Kvm.c:[m[K In function ‘[01m[Ktlb_search_entry[m[K’:
+[01m[Kvm.c:146:24:[m[K [01;31m[Kerror: [m[Kinvalid initializer
+  146 |     TlbSearch search = [01;31m[K([m[KTlbSearch *)arg;
+      |                        [01;31m[K^[m[K
+[01m[Kvm.c:148:11:[m[K [01;31m[Kerror: [m[Kinvalid type argument of ‘[01m[K->[m[K’ (have ‘[01m[KTlbSearch[m[K’ {aka ‘[01m[Kstruct node[m[K’})
+  148 |     search[01;31m[K->[m[Kfound = (tlb_page[search->slot] == search->page);
+      |           [01;31m[K^~[m[K
+[01m[Kvm.c:148:37:[m[K [01;31m[Kerror: [m[Kinvalid type argument of ‘[01m[K->[m[K’ (have ‘[01m[KTlbSearch[m[K’ {aka ‘[01m[Kstruct node[m[K’})
+  148 |     search->found = (tlb_page[search[01;31m[K->[m[Kslot] == search->page);
+      |                                     [01;31m[K^~[m[K
+[01m[Kvm.c:148:54:[m[K [01;31m[Kerror: [m[Kinvalid type argument of ‘[01m[K->[m[K’ (have ‘[01m[KTlbSearch[m[K’ {aka ‘[01m[Kstruct node[m[K’})
+  148 |     search->found = (tlb_page[search->slot] == search[01;31m[K->[m[Kpage);
+      |                                                      [01;31m[K^~[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Ktlb_insert[m[K’:
+[01m[Kvm.c:203:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kind[m[K’ undeclared (first use in this function); did you mean ‘[01m[Kint[m[K’?
+  203 |         [01;31m[Kind[m[K = tlb_choose_lru();
+      |         [01;31m[K^~~[m[K
+      |         [32m[Kint[m[K
+[01m[Kvm.c:203:9:[m[K [01;36m[Knote: [m[Keach undeclared identifier is reported only once for each function it appears in
+[01m[Kvm.c:199:37:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kframe[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  199 | static int tlb_insert(int page, [01;35m[Kint frame[m[K){
+      |                                 [01;35m[K~~~~^~~~~[m[K
+make: *** [Makefile:7: vm] Error 1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[01m[Kvm.c:[m[K In function ‘[01m[Ktlb_insert[m[K’:
+[01m[Kvm.c:199:37:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kframe[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  199 | static int tlb_insert(int page, [01;35m[Kint frame[m[K){
+      |                                 [01;35m[K~~~~^~~~~[m[K
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make clear
+[?2004lmake: *** No rule to make target 'clear'.  Stop.
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make clean
+[?2004lrm -f vm
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make [K
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mls -l vm[27mls -l vm
+[?2004l-rwxr-xr-x 1 marcus marcus 21840 Nov 20 16:09 [0m[01;32mvm[0m
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mmake clean[27mmake clean
+[?2004lrm -f vm
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mls vm[27mls vm
+[?2004lls: cannot access 'vm': No such file or directory
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt fifo fifo ; tail -5 correct.txt[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt fifo fifo ; tail -5 correct.txt
+[?2004lNumber of Translated Addresses = 1000
+Page Faults = 538
+Page Fault Rate = 0.538
+TLB Hits = 54
+TLB Hit Rate = 0.054
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt fifo lru  ; tail -5 correct.txt[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt fifo lru  ; tail -5 correct.txt
+[?2004lNumber of Translated Addresses = 1000
+Page Faults = 538
+Page Fault Rate = 0.538
+TLB Hits = 55
+TLB Hit Rate = 0.055
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt lru fifo  ; tail -5 correct.txt[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt lru fifo  ; tail -5 correct.txt
+[?2004lNumber of Translated Addresses = 1000
+Page Faults = 539
+Page Fault Rate = 0.539
+TLB Hits = 54
+TLB Hit Rate = 0.054
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt lru lru   ; tail -5 correct.txt[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt lru lru   ; tail -5 correct.txt
+[?2004lNumber of Translated Addresses = 1000
+Page Faults = 539
+Page Fault Rate = 0.539
+TLB Hits = 55
+TLB Hit Rate = 0.055
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt lru fifo[27m./vm addresses.txt lru fifo
+[?2004l[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mdiff correct.txt correct_prof.txt && echo IDENTICO[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdiff correct.txt correct_prof.txt && echo IDENTICO
+[?2004lIDENTICO
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mpython3 -c "[27m
+[7mimport re[27m
+[7mb=open('BACKING_STORE.bin','rb').read()[27m
+[7mbad=0[27m
+[7mfor l in open('correct.txt'):[27m
+[7m    m=re.match(r'Virtual address: (\d+) TLB: \d+ Physical address: \d+ Value: (-?\d+)',l)[27m
+[7m    if m:[27m
+[7m        a,v=int(m.group(1)),int(m.group(2))[27m
+[7m        e=b[a]-256 if b[a]>127 else b[a][27m
+[7m        bad+=(e!=v)[27m
+[7mprint('valores errados:',bad)[27m
+[7m"[27m[A[A[A[A[A[A[A[A[A[A[A]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ python3 -c "
+import re
+b=open('BACKING_STORE.bin','rb').read()
+bad=0
+for l in open('correct.txt'):
+    m=re.match(r'Virtual address: (\d+) TLB: \d+ Physical address: \d+ Value: (-?\d+)',l)
+    if m:
+        a,v=int(m.group(1)),int(m.group(2))
+        e=b[a]-256 if b[a]>127 else b[a]
+        bad+=(e!=v)
+print('valores errados:',bad)
+"
+[?2004lvalores errados: 0
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mprintf '16916\n' > um.txt[27mprintf '16916\n' > um.txt
+[?2004l[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm um.txt lru fifo ; cat correct.txt[27m./vm um.txt lru fifo ; cat correct.txt
+[?2004lVirtual address: 16916 TLB: 0 Physical address: 20 Value: 0
+Number of Translated Addresses = 1
+Page Faults = 1
+Page Fault Rate = 1.000
+TLB Hits = 0
+TLB Hit Rate = 0.000
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mprintf '16916\n16916\n' > repetido.txt[27mprintf '16916\n16916\n' > repetido.txt
+[?2004l[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm repetido.txt lru fifo ; cat correct.txt[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm repetido.txt lru fifo ; cat correct.txt
+[?2004lVirtual address: 16916 TLB: 0 Physical address: 20 Value: 0
+Virtual address: 16916 TLB: 0 Physical address: 20 Value: 0
+Number of Translated Addresses = 2
+Page Faults = 1
+Page Fault Rate = 0.500
+TLB Hits = 1
+TLB Hit Rate = 0.500
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mprintf '0\n65535\n' > limites.txt[27mprintf '0\n65535\n' > limites.txt
+[?2004l[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm limites.txt lru fifo ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm limites.txt lru fifo ; echo "exit=$?"
+[?2004lexit=0
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm ; echo "exit=$?"[27m./vm ; echo "exit=$?"
+[?2004lUso: ./vm <arquivo_de_enderecos> <fifo|lru> <fifo|lru>
+exit=1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt ; echo "exit=$?"[27m./vm addresses.txt ; echo "exit=$?"
+[?2004lUso: ./vm <arquivo_de_enderecos> <fifo|lru> <fifo|lru>
+exit=1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt lru ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt lru ; echo "exit=$?"
+[?2004lUso: ./vm <arquivo_de_enderecos> <fifo|lru> <fifo|lru>
+exit=1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt lru fifo extra ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt lru fifo extra ; echo "exit=$?"
+[?2004lUso: ./vm <arquivo_de_enderecos> <fifo|lru> <fifo|lru>
+exit=1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt abc fifo ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt abc fifo ; echo "exit=$?"
+[?2004lErro: algoritmo de pagina 'abc' invalido (use fifo ou lru)
+exit=1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt lru xyz ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt lru xyz ; echo "exit=$?"
+[?2004lErro: algoritmo da TLB 'xyz' invalido (use fifo ou lru)
+exit=1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt LRU fifo ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt LRU fifo ; echo "exit=$?"
+[?2004lErro: algoritmo de pagina 'LRU' invalido (use fifo ou lru)
+exit=1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm naoexiste.txt lru fifo ; echo "exit=$?"[27m
+
+[7mprintf '100\nabc\n' > texto.txt     ; ./vm texto.txt lru fifo ; echo "exit=$?"[27m
+[7mprintf '70000\n' > grande.txt       ; ./vm grande.txt lru fifo ; echo "exit=$?"[27m
+[7mprintf -- '-5\n' > negativo.txt     ; ./vm negativo.txt lru fifo ; echo "exit=$?"[27m
+[7mprintf '12.5\n' > decimal.txt       ; ./vm decimal.txt lru fifo ; echo "exit=$?"[27m
+[7mprintf '0x10\n' > hexa.txt          ; ./vm hexa.txt lru fifo ; echo "exit=$?"[27m
+[7mprintf '100 200\n' > duasnolinha.txt ; ./vm duasnolinha.txt lru fifo ; echo "exit=$?"[27m
+[7m: > vazio.txt                        ; ./vm vazio.txt lru fifo ; echo "exit=$?"[27m
+[7mhead -c 1000 /dev/zero | tr '\0' '1' > longa.txt ; ./vm longa.txt lru fifo ; echo "exit=$?"[27m
+
+[7mprintf '100\n' > semperm.txt ; chmod 000 semperm.txt ; ./vm semperm.txt lru fifo ; echo "exit=$?"[27m
+[7mchmod 644 semperm.txt[27m[A[A[A[A[A[A[A[A[A[A[A[A]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ ./vm naoexiste.txt lru fifo ; echo "exit=$?"
+
+printf '100\nabc\n' > texto.txt     ; ./vm texto.txt lru fifo ; echo "exit=$?"
+printf '70000\n' > grande.txt       ; ./vm grande.txt lru fifo ; echo "exit=$?"
+printf -- '-5\n' > negativo.txt     ; ./vm negativo.txt lru fifo ; echo "exit=$?"
+printf '12.5\n' > decimal.txt       ; ./vm decimal.txt lru fifo ; echo "exit=$?"
+printf '0x10\n' > hexa.txt          ; ./vm hexa.txt lru fifo ; echo "exit=$?"
+printf '100 200\n' > duasnolinha.txt ; ./vm duasnolinha.txt lru fifo ; echo "exit=$?"
+: > vazio.txt                        ; ./vm vazio.txt lru fifo ; echo "exit=$?"
+head -c 1000 /dev/zero | tr '\0' '1' > longa.txt ; ./vm longa.txt lru fifo ; echo "exit=$?"
+
+printf '100\n' > semperm.txt ; chmod 000 semperm.txt ; ./vm semperm.txt lru fifo ; echo "exit=$?"
+chmod 644 semperm.txt
+[?2004lErro: nao foi possivel abrir o arquivo 'naoexiste.txt'
+exit=1
+Erro: formato invalido na linha 2
+exit=1
+Erro: formato invalido na linha 1
+exit=1
+Erro: formato invalido na linha 1
+exit=1
+Erro: formato invalido na linha 1
+exit=1
+Erro: formato invalido na linha 1
+exit=1
+Erro: formato invalido na linha 1
+exit=1
+Erro: arquivo de enderecos vazio
+exit=1
+Erro: linha 1 muito longa
+exit=1
+Erro: nao foi possivel abrir o arquivo 'semperm.txt'
+exit=1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mmv BACKING_STORE.bin temp.bin[27mmv BACKING_STORE.bin temp.bin
+[?2004l[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt lru fifo ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt lru fifo ; echo "exit=$?"
+[?2004lErro: nao foi possivel abrir 'BACKING_STORE.bin'
+exit=1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mmv temp.bin BACKING_STORE.bin[27mmv temp.bin BACKING_STORE.bin
+[?2004l[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mprintf '100\r\n200\r\n' > windows.txt          ; ./vm windows.txt lru fifo ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cprintf '100\r\n200\r\n' > windows.txt          ; ./vm windows.txt lru fifo ; echo "exit=$?"
+[?2004lexit=0
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mprintf '100\n\n200\n' > embranco.txt           ; ./vm embranco.txt lru fifo ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cprintf '100\n\n200\n' > embranco.txt           ; ./vm embranco.txt lru fifo ; echo "exit=$?"
+[?2004lexit=0
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mprintf '100\n200' > semquebra.txt              ; ./vm semquebra.txt lru fifo ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cprintf '100\n200' > semquebra.txt              ; ./vm semquebra.txt lru fifo ; echo "exit=$?"
+[?2004lexit=0
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mprintf '  100  \n' > espacos.txt               ; ./vm espacos.txt lru fifo ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cprintf '  100  \n' > espacos.txt               ; ./vm espacos.txt lru fifo ; echo "exit=$?"
+[?2004lexit=0
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mgcc -fsanitize=address,undefined -g -pthread -o vm_asan vm.c[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cgcc -fsanitize=address,undefined -g -pthread -o vm_asan vm.c
+[?2004l[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm_asan addresses.txt lru lru ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm_asan addresses.txt lru lru ; echo "exit=$?"
+[?2004lexit=0
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mgcc -fsanitize=thread -g -pthread -o vm_tsan vm.c[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cgcc -fsanitize=thread -g -pthread -o vm_tsan vm.c
+[?2004l[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm_tsan addresses.txt lru lru ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm_tsan addresses.txt lru lru ; echo "exit=$?"
+[?2004lFATAL: ThreadSanitizer: unexpected memory mapping 0x61439b3c1000-0x61439b3c2000
+exit=66
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt lru fifo[27m./vm addresses.txt lru fifo
+[?2004l[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mdiff correct.txt correct_prof.txt && echo IDENTICO[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdiff correct.txt correct_prof.txt && echo IDENTICO
+[?2004lIDENTICO
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-20 16:21:17-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-20 16:43:52-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="148" LINES="35"]
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ make
+[?2004lgcc -Wall -Wextra -pthread -o vm vm.c
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm addresses.txt lru fifo[27m./vm addresses.txt lru fifo
+[?2004l[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mdiff correct.txt correct_prof.txt && echo IDENTICO[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdiff correct.txt correct_prof.txt && echo IDENTICO
+[?2004lIDENTICO
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7m./vm correct.txt lru fifo ; echo "exit=$?"[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm correct.txt lru fifo ; echo "exit=$?"
+[?2004lErro: formato invalido na linha 1
+exit=1
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ [7mwc -l correct.txt[27mwc -l correct.txt
+[?2004l1005 correct.txt
+[?2004h]0;marcus@Antonio: ~/Implementação-7-VM[01;32mmarcus@Antonio[00m:[01;34m~/Implementação-7-VM[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-20 16:44:32-03:00 [COMMAND_EXIT_CODE="0"]
