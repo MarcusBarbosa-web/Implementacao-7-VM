@@ -11,7 +11,6 @@
 #define LINE_SIZE 64
 #define BACKING_FILE "BACKING_STORE.bin"
 #define OUTPUT_FILE "correct.txt"
-#define TEMP_FILE "correct.txt.tmp"
 #define ALG_FIFO 0
 #define ALG_LRU 1
 #define TLB_SIZE 16
@@ -28,10 +27,11 @@ static unsigned long frame_last_use[NUM_FRAMES];
 static unsigned long clock_counter = 0;
 static int tlb_page[TLB_SIZE];
 static int tlb_frame[TLB_SIZE];
-static int tlb_next = 0;
 static int tlb_hits = 0;
 static int tlb_alg = ALG_FIFO;
 static unsigned long tlb_last_use[TLB_SIZE];
+static unsigned long tlb_load_time[TLB_SIZE];
+static unsigned long tlb_load_counter = 0;
 
 
 typedef struct node{
@@ -197,18 +197,40 @@ static int tlb_choose_lru(void){
 }
 
 
-static int tlb_insert(int page, int frame){
-    int index;
+static int tlb_choose_fifo(void){
+    int victim = 0;
 
-    if(tlb_alg == ALG_LRU){
-        index = tlb_choose_lru();
-    }else{
-        index = tlb_next;
-        tlb_next = (tlb_next + 1) % TLB_SIZE;
+    for(int i = 1; i < TLB_SIZE; i++){
+        if(tlb_load_time[i] < tlb_load_time[victim]){
+            victim = i;
+        }
+    }
+
+    return victim;
+}
+
+
+static int tlb_insert(int page, int frame){
+    int index = -1;
+
+    for(int i = 0; i < TLB_SIZE; i++){
+        if(tlb_page[i] == -1){
+            index = i;
+            break;
+        }
+    }
+
+    if(index == -1){
+        if(tlb_alg == ALG_LRU){
+            index = tlb_choose_lru();
+        }else{
+            index = tlb_choose_fifo();
+        }
     }
 
     tlb_page[index] = page;
     tlb_frame[index] = frame;
+    tlb_load_time[index] = ++tlb_load_counter;
 
     return index;
 }
@@ -222,6 +244,52 @@ static void tlb_invalidate(int page){
             tlb_last_use[i] = 0;
         }
     }
+}
+
+
+static int validate_input(FILE *input){
+    char line[LINE_SIZE];
+    int address;
+    int line_number = 0;
+    int count = 0;
+
+    while(fgets(line, sizeof(line), input) != NULL){
+        line_number++;
+
+        if(strchr(line, '\n') == NULL && !feof(input)){
+            fprintf(stderr, "Erro: linha %d muito longa\n", line_number);
+            return 0;
+        }
+
+        const char *p = line;
+
+        while(isspace((unsigned char)*p)){
+            p++;
+        }
+
+        if(*p == '\0'){
+            continue;
+        }
+
+        if(!parse_address(line, &address)){
+            fprintf(stderr, "Erro: formato invalido na linha %d\n", line_number);
+            return 0;
+        }
+
+        count++;
+    }
+
+    if(ferror(input)){
+        fprintf(stderr, "Erro: falha ao ler o arquivo de enderecos\n");
+        return 0;
+    }
+
+    if(count == 0){
+        fprintf(stderr, "Erro: arquivo de enderecos vazio\n");
+        return 0;
+    }
+
+    return 1;
 }
 
 
@@ -324,10 +392,24 @@ int main(int argc, char *argv[]){
         return 1;
     }
 
-    output = fopen(TEMP_FILE, "w");
+    if(!validate_input(input)){
+        fclose(input);
+        fclose(backing);
+        return 1;
+    }
+
+    if(fseek(input, 0, SEEK_SET) != 0){
+        fprintf(stderr, "Erro: nao foi possivel reler o arquivo de enderecos\n");
+
+        fclose(input);
+        fclose(backing);
+        return 1;
+    }
+
+    output = fopen(OUTPUT_FILE, "w");
 
     if(output == NULL){
-        fprintf(stderr, "Erro: nao foi possivel criar '%s'\n", TEMP_FILE);
+        fprintf(stderr, "Erro: nao foi possivel criar '%s'\n", OUTPUT_FILE);
 
         fclose(input);
         fclose(backing);
@@ -369,6 +451,7 @@ int main(int argc, char *argv[]){
         translated++;
 
         fprintf(output, "Virtual address: %d TLB: %d Physical address: %d Value: %d\n", address, tlb_index, physical, value);
+        printf("Virtual address: %d TLB: %d Physical address: %d Value: %d\n", address, tlb_index, physical, value);
     }
 
     if(ferror(input)){
@@ -395,9 +478,8 @@ int main(int argc, char *argv[]){
     fclose(input);
     fclose(backing);
 
-    if(fclose(output) != 0 || rename(TEMP_FILE, OUTPUT_FILE) != 0){
+    if(fclose(output) != 0){
         fprintf(stderr, "Erro: nao foi possivel gravar '%s'\n", OUTPUT_FILE);
-        remove(TEMP_FILE);
         return 1;
     }
 
@@ -407,6 +489,5 @@ fail:
     fclose(input);
     fclose(backing);
     fclose(output);
-    remove(TEMP_FILE);
     return 1;
 }
